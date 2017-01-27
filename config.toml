@@ -1,0 +1,183 @@
+# Site settings
+baseurl = "http://subhasingh.com/"
+languageCode = "en-us"
+title = "Subha Singh. My Life in Motion."
+theme = "hugo-me-theme"
+paginate = 5
+paginatePath = "page"
+preservetaxonomynames = true
+# Enter your tracking code to enable Google Analytics
+googleAnalytics = "UA-89365396-1"
+
+
+[params]
+    
+	# You may choose a color scheme for your site.
+    # Available schemes are: gray, red, orange, yellow, green, cyan, blue, magenta, brown
+    colorscheme = "blue"
+    
+    # To provide some metadata for search engines feel free to add a few
+    # information about you and your website.
+    #Enter email address for formspree.io contact form - see below
+    author = "Subha Singh"
+    description = "Me. "
+    keywords = "me, hugo, hugo theme, blog, pages, personal site"
+    email = "singh.subha22@gmail.com"
+
+    # Sidebar
+    # Main settings
+    [params.sidebar]
+        name = "Subha Singh"
+        description = "My Life in Motion."
+        logo = "/images/profile.jpg"
+    
+    # Navigation
+    [[params.sidebar.navigation]]
+        label = "About"
+        link = "/about"
+
+   # [[params.sidebar.navigation]]
+   #     label = "What I Can Do"
+   #     link = "/skills"
+
+	 [[params.sidebar.navigation]]
+        label = "Blog"
+        link = "/blog"
+
+   # [[params.sidebar.navigation]]
+   #     label = "Projects"
+   #     link = "/works"
+
+    [[params.sidebar.navigation]]
+        label = "Contact Me"
+        link = "/contact"
+    
+    # Social links
+    #[[params.sidebar.social]]
+    #    label = "Twitter"
+    #    icon = "fa-twitter"
+    #    link = "#"
+
+    [[params.sidebar.social]]
+        label = "LinkedIn"
+        icon = "fa-linkedin"
+        link = "https://www.linkedin.com/in/subha-singh-48489589"
+        
+  [[params.sidebar.social]]
+        label = "Facebook"
+        icon = "fa-facebook"
+        link = "https://www.facebook.com/subha.singh.37"
+
+    [[params.sidebar.social]]
+        label = "Instagram"
+        icon = "fa-instagram"
+        link = "https://www.instagram.com/subha_singh/"
+        
+    [[params.sidebar.social]]
+        label = "Github"
+        icon = "fa-github"
+        link = "https://github.com/SubhaSingh"
+        
+  #  [[params.sidebar.social]]
+  #      label = "Email"
+  #      icon = "fa-envelope"
+  #      link = "http://subhasingh.com/contact"
+    
+    # About page
+    [params.about]
+        title = "Hello!"
+        intro = "Welcome to my page!"
+        text = "I am a recent BSc. Mechatronics Engineering graduate currently pursuing my Masters in Electrical Engineering. I have created this blog for me. It serves to document my learning and to share my progress and thoughts. <br><blockquote>“TWENTY YEARS FROM NOW YOU WILL BE MORE DISAPPOINTED BY THE THINGS THAT YOU DIDN’T DO THAN BY THE ONES YOU DID DO. SO THROW OFF THE BOWLINES. SAIL AWAY FROM THE SAFE HARBOR. CATCH THE TRADE WINDS IN YOUR SAILS. EXPLORE. DREAM. DISCOVER.” – MARK TWAIN</blockquote> This is me setting sail and charting a new course."
+
+    
+    # Skills page
+    [params.skills]
+        title ="Things I Can Do For You"
+        intro = "I can present you, your skills and works to the whole world."
+            
+        # List of skills or features or services
+        [[params.skills.list]]
+            icon = "fa-user"
+            description = "Show your avatar"
+    
+        [[params.skills.list]]
+            icon = "fa-list"
+            description = "Tell about your skills"
+    
+        [[params.skills.list]]
+            icon = "fa-picture-o"
+            description = "Perform your works"
+    
+        [[params.skills.list]]
+            icon = "fa-envelope"
+            description = "Communicate with your visitors"
+    
+        [[params.skills.list]]
+            icon = "fa-link"
+            description = "Link your socials"
+    
+        [[params.skills.list]]
+            icon = "fa-usd"
+            description = "Make you rich. Joke. Not Me."
+            
+    # Works page
+    [params.works]
+        title ="Few Works Made by Me"
+        intro = "Let Me present here its color schemes"
+        
+          
+        [[params.works.show]]
+            title = "Blue Color Scheme"
+            description = "Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet."
+            image = "blue.png"
+            link = "https://github.com/aerohub/hugo-me-theme"
+            
+      
+    
+    # Contact page
+    
+    # Since this template is static, the contact form uses www.formspree.io as a
+    # proxy. The form makes a POST request to their servers to send the actual
+    # email. Visitors can send up to a 1000 emails each month for free.
+    #
+    # What you need to do for the setup?
+    #
+    # - set your email address under 'email' above, under [params] and metadata
+    # - upload the generated site to your server
+    # - send a dummy email yourself to confirm your account
+    # - click the confirm link in the email from www.formspree.io
+    # - you're done. Happy mailing!
+    
+   
+    
+    [params.contact]
+        title ="Contact Me"
+        intro = ""
+        buttonText = "Send Message"
+        resetText = "Reset Form"
+        
+        # 'warning' defines error messages for invalid inputs
+        [params.contact.form.name]
+            text = "Name *"
+            warning = "Please, enter your name"
+
+        [params.contact.form.email]
+            text = "Email *"
+            warning = "Please, enter your email."
+
+        [params.contact.form.phone]
+            text = "Subject"
+
+        [params.contact.form.message]
+            text = "Message *"
+            warning = "Please, enter your message"
+    
+    # 404 page
+    [params.error]
+        title = "404"
+        intro = "Oops... Page not found!"
+        text = "We are sorry, but the page you are looking for might have been:\n\n - removed,\n - had its name changed\n - or is temporarily unavailable."
+    
+    # Footer
+    [params.footer]
+        copyright = "Subha Singh. All rights reserved."

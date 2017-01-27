@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Subha Singh. My Life in Motion.</title>
+    <link>http://subhasingh.com/tags/clojure/index.xml</link>
+    <description>Recent content on Subha Singh. My Life in Motion.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://subhasingh.com/tags/clojure/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to Setup Datomic Free with Clojure</title>
+      <link>http://subhasingh.com/blog/How-to-Setup-Datomic-Free/</link>
+      <pubDate>Mon, 23 Jan 2017 19:43:28 +0200</pubDate>
+      
+      <guid>http://subhasingh.com/blog/How-to-Setup-Datomic-Free/</guid>
+      <description>
+
+&lt;p&gt;This Tutorial focuses on getting up and running with Datomic Free in your&amp;rsquo; Clojure project. Datomic Free is recommended for open source applications. It includes a memory database and embedded Datomic &lt;a href=&#34;http://www.learndatalogtoday.org/&#34;&gt;Datalog&lt;/a&gt;, but it is limited to two simultaneous peers.&lt;/p&gt;
+
+&lt;h3 id=&#34;download-datomic&#34;&gt;Download Datomic&lt;/h3&gt;
+
+&lt;p&gt;To get started &lt;a href=&#34;https://my.datomic.com/downloads/free&#34;&gt;download the latest Datomic Free version&lt;/a&gt; from the Datomic website. Extract the .zip files locally and run the following commands in the system shell from the root directory of the Datomic Free install:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cd /home/user/datomic/datomic-free-&amp;lt;VERSION&amp;gt;/ #Change to the root directory and replace &amp;lt;VERSION&amp;gt; with your download version
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;add-datomic-to-your-clojure-project&#34;&gt;Add Datomic to your Clojure Project&lt;/h3&gt;
+
+&lt;p&gt;Add Datomic to the list of dependencies in your project.clj.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(defproject datomic_app &amp;quot;0.1.0-SNAPSHOT&amp;quot;
+  :description &amp;quot;Datomic Example Setup&amp;quot;
+  :url &amp;quot;http://example.com/FIXME&amp;quot;
+  :license {:name &amp;quot;Eclipse Public License&amp;quot;
+            :url &amp;quot;http://www.eclipse.org/legal/epl-v10.html&amp;quot;}
+  :dependencies [[org.clojure/clojure &amp;quot;1.9.0-alpha14&amp;quot;]
+                 [com.datomic/datomic-free &amp;quot;0.9.5544&amp;quot;]] # Change to your download version 
+  :main ^:skip-aot datomic-app.core
+  :target-path &amp;quot;target/%s&amp;quot;
+  :profiles {:uberjar {:aot :all}})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Include the &lt;a href=&#34;http://docs.datomic.com/clojure/&#34;&gt;datomic.api&lt;/a&gt; in the namespace of the core.clj file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(ns datomic-app.core
+  (:require [datomic.api :as d])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;start-datomic-transactor&#34;&gt;Start Datomic Transactor&lt;/h3&gt;
+
+&lt;p&gt;In order to transact data to your database you need to start a local transactor. Data will only be saved to the Datomic database when the transactor is running. You can edit the &lt;em&gt;transactor.properties file (datomic-free-0.9.5544/config/samples/free-transactor-template.properties)&lt;/em&gt; to insert a license key for example, but this is not necessary for the Datomic Free version. Start a local transactor from your system shell from the root directory of the Datomic Free install:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bin/transactor path/to/free-transactor-template.properties # Replace path/to/ with the path to the file.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You will see the following output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Launching with Java options -server -Xms1g -Xmx1g -XX:+UseG1GC -XX:MaxGCPauseMillis=50
+Starting datomic:free://localhost:4334/&amp;lt;DB-NAME&amp;gt;, storing data in: data ...
+System started datomic:free://localhost:4334/&amp;lt;DB-NAME&amp;gt;, storing data in: data
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Datomic Free uses an &lt;a href=&#34;https://en.wikipedia.org/wiki/H2_(DBMS)&#34;&gt;H2 database engine&lt;/a&gt; and stores your data in the data folder of the Datomic Free root directory.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-a-database&#34;&gt;Create a Database&lt;/h3&gt;
+
+&lt;p&gt;Add the following code to your core.clj file to create a Datomic database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(def  uri &amp;quot;datomic:free://localhost:4334/example&amp;quot;) #Change example to the name of your database
+
+(d/create-database uri)
+
+(def conn (d/connect uri))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;transact-data&#34;&gt;Transact Data&lt;/h3&gt;
+
+&lt;p&gt;Datoms represent the data or facts that a Datomic database stores. The set of attibutes a datom can specify is defnined by the database&amp;rsquo;s schema. A schema describes the set of attibutes that can be associated with entities in each Datomic Database. See the &lt;a href=&#34;http://docs.datomic.com/schema.html&#34;&gt;Datomic Schema Documentation&lt;/a&gt; for more information about Datomic schemas.&lt;/p&gt;
+
+&lt;p&gt;There are three required schema attributes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;:db/ident&lt;/li&gt;
+&lt;li&gt;:db/valueType&lt;/li&gt;
+&lt;li&gt;:db/cardinality.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Below is an example of a simple schema for adding user email addresses of individuals in the Datomic database:&lt;/p&gt;
+
+&lt;h4 id=&#34;schema-example-1&#34;&gt;Schema Example 1&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;#Schema for email entity
+(def schema
+  [{:db/id #db/id[:db.part/db]
+    :db/ident :person/email
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db/unique :db.unique/value
+    :db/doc &amp;quot;The email of the person&amp;quot;
+    :db.install/_attribute :db.part/db}])
+
+(d/transact conn schema)
+
+#Add user email addresses to database
+(def add-emails
+  [{:db/id #db/id[:db.part/user -1000001] :person/email &amp;quot;example@gmail.com&amp;quot;}
+   {:db/id #db/id[:db.part/user -1000002] :person/email &amp;quot;john@gmail.com&amp;quot;}
+   {:db/id #db/id[:db.part/user -1000003] :person/email &amp;quot;jane@gmail.com&amp;quot;}])
+
+(d/transact conn add-emails)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Note that partition &lt;a href=&#34;https://github.com/edn-format/edn#tagged-elements&#34;&gt;edn tagged data literals&lt;/a&gt; may not be used in combination with &lt;a href=&#34;http://docs.datomic.com/clojure/#datomic.api/tempid&#34;&gt;Datomic tempid&lt;/a&gt; when transacting data to the database &lt;em&gt;i.e.{:db/id #db/id[:db.part/user -1000001]  :name/email &amp;ldquo;example@gmail.com&amp;rdquo;}&lt;/em&gt;.&lt;/strong&gt; A partition may be specified in some of the following ways when transacting data to the database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{:db/id #db/id[:db.part/user -1000001]  :name/email &amp;quot;example@gmail.com&amp;quot;} #Using edn tagged data literals and providing a temporary id
+
+{:db/id (d/tempid :db.part/user)  :name/email &amp;quot;example@gmail.com&amp;quot;} #Using tempids
+
+{:db/id (d/tempid :db.part/user -9999999)  :name/email &amp;quot;example@gmail.com&amp;quot;} #Using tempids with numerical temporary id
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;More information about &lt;a href=&#34;http://docs.datomic.com/transactions.html&#34;&gt;transactions&lt;/a&gt; is provided in the Datomic documentation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#Query database for all email address entities ids
+(let [db (d/db conn)]  #Make sure you use the latest db with all the above changes added
+   (d/q &#39;[:find ?e
+          :in $
+          :where
+          [?e :person/email _]]
+        db))
+
+=&amp;gt; #{[17592186045418] [17592186045419] [17592186045420]}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;schema-example-2&#34;&gt;Schema Example 2&lt;/h4&gt;
+
+&lt;p&gt;Entities can refer to other entities with attributes of reference type. When you create a reference type, Datomic automatically indexes the reference in both directions. An example of a schema with reference types:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(def schema
+  [{:db/id #db/id[:db.part/db]
+    :db/ident :suburb/name
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db/doc &amp;quot;The name of the suburb&amp;quot;
+   :db.install/_attribute :db.part/db}
+
+   {:db/id #db/id[:db.part/db]
+    :db/ident :suburb/city
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db/doc &amp;quot;The name of the city the suburb is located in&amp;quot;
+    :db.install/_attribute :db.part/db}
+
+   {:db/id #db/id[:db.part/db]
+    :db/ident :city/province
+    :db/valueType :db.type/ref
+    :db/cardinality :db.cardinality/one
+    :db/doc &amp;quot;The name of the province in which the city is located&amp;quot;
+    :db.install/_attribute :db.part/db}
+
+    {:db/id #db/id[:db.part/db]
+    :db/ident :province/name
+    :db/valueType :db.type/string
+    :db/cardinality :db.cardinality/one
+    :db/doc &amp;quot;The name of the province in which the city is located&amp;quot;
+    :db.install/_attribute :db.part/db}])
+
+
+(d/transact conn schema-3)
+
+(def add-suburbs
+  [{:db/id #db/id [:db.part/suburb -1000076]   :suburb/name &amp;quot;Bellville&amp;quot; :suburb/city &amp;quot;Cape Town&amp;quot; :province/name &amp;quot;Western Cape&amp;quot;}
+   {:db/id #db/id [:db.part/suburb -1000089] :suburb/name &amp;quot;Athlone&amp;quot; :suburb/city &amp;quot;Cape Town&amp;quot; :province/name &amp;quot;Western Cape&amp;quot;}
+   {:db/id (d/tempid :db.part/suburb) :suburb/name &amp;quot;Rondebosch&amp;quot; :suburb/city &amp;quot;Cape Town&amp;quot; :province/name &amp;quot;Western Cape&amp;quot;}])
+
+
+(d/transact conn add-suburbs)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;String tempids create entities in the default partition for the transactor process. The default partition of the Datomic database can be set by editing the transactor properties file. If no partition is specified the transactor will use the built-in &lt;em&gt;:db.part/user&lt;/em&gt; partition. New partitions, like &lt;em&gt;:db.part/suburb&lt;/em&gt; in example 2 above, can be created by following the &lt;a href=&#34;http://docs.datomic.com/schema.html&#34;&gt;Datomic Schema Documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-a-database-backup&#34;&gt;Create a Database Backup&lt;/h3&gt;
+
+&lt;p&gt;A database backup cannot be created for an in memory database. To backup your database start the transactor and run the following command in the system shell from the root directory of the Datomic Free install with the uri of your database and the path to your backup uri:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bin/datomic -Xmx4g -Xms4g backup-db from-db-uri to-backup-uri #Change uri paths
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The following backs up the example database to a local backup folder in the Datomic Free root directory.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bin/datomic -Xmx4g -Xms4g backup-db datomic:free://localhost:4334/example file:backup
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;use-the-datomic-console&#34;&gt;Use the Datomic Console&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&#34;http://docs.datomic.com/console.html&#34;&gt;Datomic Console&lt;/a&gt; is a graphical UI for datamic databases. It &lt;strong&gt;may not&lt;/strong&gt; be used to view an in memory database. To use the Datomic console, first follow the instructions in the README-CONSOLE file of the root folder.&lt;/p&gt;
+
+&lt;h3 id=&#34;resources&#34;&gt;Resources&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.datomic.com/&#34;&gt;Datomic Official Website&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.datomic.com/&#34;&gt;Datomic Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Datomic/mbrainz-sample&#34;&gt;Datomic MusicBrainz sample database&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.datomic.com/clojure/&#34;&gt;Datomic Clojure API documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.learndatalogtoday.org/&#34;&gt;Learn Datalog Today&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

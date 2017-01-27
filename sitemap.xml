@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://subhasingh.com/</loc>
+    <lastmod>2017-01-23T19:43:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://subhasingh.com/blog/How-to-Setup-Datomic-Free/</loc>
+    <lastmod>2017-01-23T19:43:28+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://subhasingh.com/about/</loc>
+  </url>
+  
+  <url>
+    <loc>http://subhasingh.com/contact/</loc>
+  </url>
+  
+  <url>
+    <loc>http://subhasingh.com/works/</loc>
+  </url>
+  
+  <url>
+    <loc>http://subhasingh.com/skills/</loc>
+  </url>
+  
+</urlset>
