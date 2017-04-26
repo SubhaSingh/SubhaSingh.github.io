@@ -77,7 +77,12 @@ googleAnalytics = "UA-89365396-1"
         label = "Github"
         icon = "fa-github"
         link = "https://github.com/SubhaSingh"
-        
+
+    [[params.sidebar.social]]
+        label = "Books"
+        icon = "fa-book"
+        link = "https://www.goodreads.com/user/show/65625822-subha-singh"
+
   #  [[params.sidebar.social]]
   #      label = "Email"
   #      icon = "fa-envelope"
