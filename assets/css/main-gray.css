@@ -1920,6 +1920,13 @@ input[type="radio"] + label:before {
   display: none;
 }
 
+#socialicons .goodreads {
+    font-family: Arial, Sans-Serif;
+    font-size: 26px;
+    line-height: 25px;
+    vertical-align: middle;
+}
+
 /* Image */
 .image {
   border-radius: 5px;
