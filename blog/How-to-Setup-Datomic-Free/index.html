@@ -3,7 +3,7 @@
 <html>
 	
 		<head>
-		<title>How to Setup Datomic Free with Clojure - Subha Singh. My Life in Motion.</title>
+		<title>How to Setup Datomic Free with Clojure - Subha Singh</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="Me. ">
@@ -32,7 +32,7 @@ ga('send', 'pageview');
 				<header>
 					<span class="image avatar"><a href="http://subhasingh.com/"><img src="http://subhasingh.com/images/profile.jpg" alt="" /></a></span>
 					<h1 id="logo"><a href="http://subhasingh.com/">Subha Singh</a></h1>
-					<p>My Life in Motion.</p>
+					<p>Clojure Developer. Explorer. Lifelong Learner.</p>
 				</header>
 				<nav id="nav">
 					<ul>
@@ -49,8 +49,6 @@ ga('send', 'pageview');
 					<ul class="icons">
 						
 							<li><a href="https://www.linkedin.com/in/subha-singh-48489589" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						
-							<li><a href="https://www.facebook.com/subha.singh.37" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 						
 							<li><a href="https://www.instagram.com/subha_singh/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 						
@@ -88,7 +86,7 @@ ga('send', 'pageview');
 
 <p>This Tutorial focuses on getting up and running with Datomic Free in your&rsquo; Clojure project. Datomic Free is recommended for open source applications. It includes a memory database and embedded Datomic <a href="http://www.learndatalogtoday.org/">Datalog</a>, but it is limited to two simultaneous peers.</p>
 
-<h3 id="download-datomic">Download Datomic</h3>
+<h3 id="download-datomic:6b79498f2f85e86c110eca7328145682">Download Datomic</h3>
 
 <p>To get started <a href="https://my.datomic.com/downloads/free">download the latest Datomic Free version</a> from the Datomic website. Extract the .zip files locally and run the following commands in the system shell from the root directory of the Datomic Free install:</p>
 
@@ -97,7 +95,7 @@ ga('send', 'pageview');
 
 </code></pre>
 
-<h3 id="add-datomic-to-your-clojure-project">Add Datomic to your Clojure Project</h3>
+<h3 id="add-datomic-to-your-clojure-project:6b79498f2f85e86c110eca7328145682">Add Datomic to your Clojure Project</h3>
 
 <p>Add Datomic to the list of dependencies in your project.clj.</p>
 
@@ -119,7 +117,7 @@ ga('send', 'pageview');
   (:require [datomic.api :as d])
 </code></pre>
 
-<h3 id="start-datomic-transactor">Start Datomic Transactor</h3>
+<h3 id="start-datomic-transactor:6b79498f2f85e86c110eca7328145682">Start Datomic Transactor</h3>
 
 <p>In order to transact data to your database you need to start a local transactor. Data will only be saved to the Datomic database when the transactor is running. You can edit the <em>transactor.properties file (datomic-free-0.9.5544/config/samples/free-transactor-template.properties)</em> to insert a license key for example, but this is not necessary for the Datomic Free version. Start a local transactor from your system shell from the root directory of the Datomic Free install:</p>
 
@@ -134,9 +132,9 @@ System started datomic:free://localhost:4334/&lt;DB-NAME&gt;, storing data in: d
 
 </code></pre>
 
-<p>Datomic Free uses an <a href="https://en.wikipedia.org/wiki/H2_(DBMS)">H2 database engine</a> and stores your data in the data folder of the Datomic Free root directory.</p>
+<p>Datomic Free uses an <a href="https://en.wikipedia.org/wiki/H2_(DBMS">H2 database engine</a>) and stores your data in the data folder of the Datomic Free root directory.</p>
 
-<h3 id="create-a-database">Create a Database</h3>
+<h3 id="create-a-database:6b79498f2f85e86c110eca7328145682">Create a Database</h3>
 
 <p>Add the following code to your core.clj file to create a Datomic database:</p>
 
@@ -147,7 +145,7 @@ System started datomic:free://localhost:4334/&lt;DB-NAME&gt;, storing data in: d
 (def conn (d/connect uri))
 </code></pre>
 
-<h3 id="transact-data">Transact Data</h3>
+<h3 id="transact-data:6b79498f2f85e86c110eca7328145682">Transact Data</h3>
 
 <p>Datoms represent the data or facts that a Datomic database stores. The set of attibutes a datom can specify is defnined by the database&rsquo;s schema. A schema describes the set of attibutes that can be associated with entities in each Datomic Database. See the <a href="http://docs.datomic.com/schema.html">Datomic Schema Documentation</a> for more information about Datomic schemas.</p>
 
@@ -161,7 +159,7 @@ System started datomic:free://localhost:4334/&lt;DB-NAME&gt;, storing data in: d
 
 <p>Below is an example of a simple schema for adding user email addresses of individuals in the Datomic database:</p>
 
-<h4 id="schema-example-1">Schema Example 1</h4>
+<h4 id="schema-example-1:6b79498f2f85e86c110eca7328145682">Schema Example 1</h4>
 
 <pre><code>#Schema for email entity
 (def schema
@@ -208,7 +206,7 @@ System started datomic:free://localhost:4334/&lt;DB-NAME&gt;, storing data in: d
 =&gt; #{[17592186045418] [17592186045419] [17592186045420]}
 </code></pre>
 
-<h4 id="schema-example-2">Schema Example 2</h4>
+<h4 id="schema-example-2:6b79498f2f85e86c110eca7328145682">Schema Example 2</h4>
 
 <p>Entities can refer to other entities with attributes of reference type. When you create a reference type, Datomic automatically indexes the reference in both directions. An example of a schema with reference types:</p>
 
@@ -255,7 +253,7 @@ System started datomic:free://localhost:4334/&lt;DB-NAME&gt;, storing data in: d
 
 <p>String tempids create entities in the default partition for the transactor process. The default partition of the Datomic database can be set by editing the transactor properties file. If no partition is specified the transactor will use the built-in <em>:db.part/user</em> partition. New partitions, like <em>:db.part/suburb</em> in example 2 above, can be created by following the <a href="http://docs.datomic.com/schema.html">Datomic Schema Documentation</a>.</p>
 
-<h3 id="create-a-database-backup">Create a Database Backup</h3>
+<h3 id="create-a-database-backup:6b79498f2f85e86c110eca7328145682">Create a Database Backup</h3>
 
 <p>A database backup cannot be created for an in memory database. To backup your database start the transactor and run the following command in the system shell from the root directory of the Datomic Free install with the uri of your database and the path to your backup uri:</p>
 
@@ -268,11 +266,11 @@ System started datomic:free://localhost:4334/&lt;DB-NAME&gt;, storing data in: d
 
 </code></pre>
 
-<h3 id="use-the-datomic-console">Use the Datomic Console</h3>
+<h3 id="use-the-datomic-console:6b79498f2f85e86c110eca7328145682">Use the Datomic Console</h3>
 
 <p>The <a href="http://docs.datomic.com/console.html">Datomic Console</a> is a graphical UI for datamic databases. It <strong>may not</strong> be used to view an in memory database. To use the Datomic console, first follow the instructions in the README-CONSOLE file of the root folder.</p>
 
-<h3 id="resources">Resources</h3>
+<h3 id="resources:6b79498f2f85e86c110eca7328145682">Resources</h3>
 
 <ul>
 <li><a href="http://www.datomic.com/">Datomic Official Website</a></li>
@@ -300,7 +298,7 @@ System started datomic:free://localhost:4334/&lt;DB-NAME&gt;, storing data in: d
 								<section id="footer">
 						<div class="container">
 							<ul class="copyright">
-								<li>2017 &copy; Subha Singh. All rights reserved.</li>
+								<li>2019 &copy; Subha Singh. All rights reserved.</li>
 							</ul>
 						</div>
 					</section>
