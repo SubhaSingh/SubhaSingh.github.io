@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Contact-rsses on Subha Singh. My Life in Motion.</title>
-    <link>http://subhasingh.com/contact/index.xml</link>
-    <description>Recent content in Contact-rsses on Subha Singh. My Life in Motion.</description>
+    <title>Contacts on Subha Singh</title>
+    <link>http://subhasingh.com/contact/</link>
+    <description>Recent content in Contacts on Subha Singh</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <atom:link href="http://subhasingh.com/contact/index.xml" rel="self" type="application/rss+xml" />
